@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/brianeno/goredis/db"
 	"github.com/gin-gonic/gin"
-	"gitlab.com/brianeno/gokafka/db"
 )
 
 var (
@@ -25,7 +25,7 @@ func main() {
 
 func initRouter(database *db.RedisDatabase) *gin.Engine {
 	r := gin.Default()
-	r.GET("/storypoints/:title", func(c *gin.Context) {
+	r.GET("/projects/:title", func(c *gin.Context) {
 		title := c.Param("title")
 		project, err := database.GetProject(title)
 		if err != nil {
@@ -39,7 +39,7 @@ func initRouter(database *db.RedisDatabase) *gin.Engine {
 		c.JSON(http.StatusOK, gin.H{"project": project})
 	})
 
-	r.POST("/storypoints", func(c *gin.Context) {
+	r.POST("/projects", func(c *gin.Context) {
 		var userJson db.Project
 		if err := c.ShouldBindJSON(&userJson); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

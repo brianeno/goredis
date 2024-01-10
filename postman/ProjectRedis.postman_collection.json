@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"GoProject\",\n    \"storypoints\": 12,\n    \"rank\": 1\n}",
+					"raw": "{\n    \"title\": \"CSharpProject\",\n    \"storypoints\": 12\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,14 +21,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/storypoints",
+					"raw": "http://localhost:8080/projects",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"storypoints"
+						"projects"
 					]
 				}
 			},
@@ -83,15 +83,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/storypoints/JavaProject",
+					"raw": "http://localhost:8080/projects/CSharpProject",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"storypoints",
-						"JavaProject"
+						"projects",
+						"CSharpProject"
 					]
 				}
 			},

@@ -2,8 +2,12 @@
 
 
 # Redis
+
+## Run
 docker run -p 6379:6379 --name my-redis -d redis
 
+## Remove
 docker rm -f my-redis
 
-docker run --rm -it redis:alpine redis-cli -h localhost
+## Run Redis CLI
+docker run --rm --name redis-cli -it redis:alpine redis-cli -h localhost

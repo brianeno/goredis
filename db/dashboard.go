@@ -8,16 +8,16 @@ type Dashboard struct {
 }
 
 func (db *RedisDatabase) GetDashboard() (*Dashboard, error) {
-	scores := db.Client.ZRangeWithScores(Ctx, dashboardKey, 0, -1)
-	if scores == nil {
+	sps := db.Client.ZRangeWithScores(Ctx, dashboardKey, 0, -1)
+	if sps == nil {
 		return nil, ErrNil
 	}
-	count := len(scores.Val())
+	count := len(sps.Val())
 	projects := make([]*Project, count)
-	for idx, member := range scores.Val() {
+	for idx, project := range sps.Val() {
 		projects[idx] = &Project{
-			Title:       member.Member.(string),
-			Storypoints: int(member.Score),
+			Title:       project.Member.(string),
+			Storypoints: int(project.Score),
 			Rank:        idx,
 		}
 	}

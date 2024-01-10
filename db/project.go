@@ -38,13 +38,13 @@ func (db *RedisDatabase) SaveProject(project *Project) error {
 
 func (db *RedisDatabase) GetProject(title string) (*Project, error) {
 	pipe := db.Client.TxPipeline()
-	score := pipe.ZScore(Ctx, dashboardKey, title)
+	sps := pipe.ZScore(Ctx, dashboardKey, title)
 	rank := pipe.ZRank(Ctx, dashboardKey, title)
 	_, err := pipe.Exec(Ctx)
 	if err != nil {
 		return nil, err
 	}
-	if score == nil {
+	if sps == nil {
 		return nil, ErrNil
 	}
 
@@ -58,7 +58,7 @@ func (db *RedisDatabase) GetProject(title string) (*Project, error) {
 	// return our project
 	return &Project{
 		Title:       title,
-		Storypoints: int(score.Val()),
+		Storypoints: int(sps.Val()),
 		Rank:        int(rank.Val()),
 	}, nil
 }
